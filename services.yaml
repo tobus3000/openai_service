@@ -1,0 +1,19 @@
+send_request:
+  fields:
+    message:
+      required: True
+      advanced: False
+      default: ""
+    mood:
+      required: False
+      advanced: True
+    temperature:
+      required: False
+      advanced: True
+      example: 0.2
+      default: 0.7
+    max_tokens:
+      required: False
+      advanced: True
+      example: 500
+      default: 300

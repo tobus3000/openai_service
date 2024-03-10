@@ -1,0 +1,80 @@
+{
+    "config": {
+        "abort": {
+            "already_configured": "Device is already configured"
+        },
+        "error": {
+            "cannot_connect": "Failed to connect",
+            "invalid_auth": "Invalid authentication",
+            "unknown": "Unexpected error"
+        },
+        "step": {
+            "custom": {
+                "data": {
+                    "model": "The large language model to use (if supported).",
+                    "name": "Name of your OpenAI Service",
+                    "url": "URL to your OpenAI compatible LLM"
+                },
+                "description": "Configure your OpenAI endpoint.",
+                "title": "Setup Endpoint"
+            },
+            "openai": {
+                "data": {
+                    "api_key": "OpenAI API key",
+                    "model": "The large language model to use",
+                    "name": "Name of your OpenAI Service"
+                },
+                "description": "Configure the OpenAI Cloud endpoint.",
+                "title": "Setup Endpoint"
+            },
+            "user": {
+                "description": "Choose between the OpenAI Cloud service or a custom LLM service.",
+                "menu_options": {
+                    "custom": "Custom ({model})",
+                    "openai": "OpenAI Cloud"
+                },
+                "title": "Select Endpoint Type"
+            }
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "data": {
+                    "max_tokens": "How many tokens to spend per response.",
+                    "mood": "A sentence that describes the persona of the assistant.",
+                    "temperature": "Higher numbers should cause more unique responses. Float (0.0 - 1.0)"
+                },
+                "description": "Fine-tuning adjustments of the OpenAI endpoint.",
+                "title": "Configure Endpoint"
+            }
+        }
+    },
+    "services": {
+        "send_request": {
+            "description": "Send a question to the OpenAI chat completion endpoint",
+            "fields": {
+                "max_tokens": {
+                    "description": "How many tokens to spend per response. Higher numbers might return longer and better responses.",
+                    "name": "Maximum Tokens"
+                },
+                "message": {
+                    "description": "The message to be sent to the OpenAI chat completion.",
+                    "example": "What is the distance from the earth to the moon?",
+                    "name": "Message"
+                },
+                "mood": {
+                    "default": "Your answers are short and precise.",
+                    "description": "Fine-tune the assistant by telling it how to process your input.",
+                    "example": "You are a helpful assistant. Your answers are short and precise.",
+                    "name": "Mood"
+                },
+                "temperature": {
+                    "description": "Float value between 0.0 and 1.0. Higher numbers should cause more unique responses.",
+                    "name": "Temperature"
+                }
+            },
+            "name": "Send OpenAI request"
+        }
+    }
+}

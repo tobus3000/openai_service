@@ -1,0 +1,80 @@
+{
+    "config": {
+      "step": {
+        "user": {
+          "title": "Wähle den Endpunkt Typ",
+          "description": "Wähle zwischen dem OpenAI Cloud service oder einem eigenen LLM service.",
+          "menu_options": {
+            "openai": "OpenAI Cloud",
+            "custom": "Eigenes ({model})"
+          }
+        },
+        "openai": {
+          "title": "Aufsetzen OpenAI Cloud",
+          "description": "Konfiguriere den OpenAI Cloud Endpunkt.",
+          "data": {
+            "name": "Name für den OpenAI Service.",
+            "api_key": "OpenAI API key.",
+            "model": "Das Sprachmodell (LLM) welches verwendet wird."
+          }
+        },
+        "custom": {
+          "title": "Aufsetzen eigener Endpunkt",
+          "description": "Konfiguriere deinen OpenAI Endpunkt.",
+          "data": {
+            "name": "Name für den OpenAI Service.",
+            "url": "Die URL zu deinem OpenAI kompatiblen Endpunkt.",
+            "model": "Das Sprachmodell (LLM) welches verwendet wird (falls unterstützt)."
+          }
+        }
+      },
+      "error": {
+        "cannot_connect": "[%key:common::config_flow::error::cannot_connect%]",
+        "invalid_auth": "[%key:common::config_flow::error::invalid_auth%]",
+        "unknown": "[%key:common::config_flow::error::unknown%]"
+      },
+      "abort": {
+        "already_configured": "[%key:common::config_flow::abort::already_configured_device%]"
+      }
+    },
+    "options": {
+      "step": {
+        "init": {
+          "title": "Konfiguriere den Endpunkt",
+          "description": "Feineinstellungen für den OpenAI Endpunkt.",
+          "data": {
+            "mood": "Ein Satz der definiert wie der Assistent antworten soll.",
+            "temperature": "Definiert wie zufällig Antworten sein dürfen.",
+            "max_tokens": "Maximale Anzahl Tokens welche pro Antwort verwendet werden dürfen."
+          }
+        }
+      }
+    },
+    "services": {
+      "send_request": {
+        "name": "Sende eine OpenAI Abfrage",
+        "description": "Sendet die Eingabe an den OpenAI Enpunkt.",
+        "fields": {
+          "message": {
+            "name": "Nachricht",
+            "description": "Die Nachricht welche an den Endpunkt gesendet wird.",
+            "example": "Was ist die Distanz zwischen der Erde und dem Mond?"
+          },
+          "mood": {
+            "name": "Stimmung",
+            "description": "Definiere wie der Assistent auf deine Fragen reagieren soll.",
+            "example": "Deine Antworten sind exakt und auf Deutsch.",
+            "default": "Du antwortest immer mit kurzen Sätzen auf Deutsch."
+          },
+          "temperature": {
+            "name": "Temperatur",
+            "description": "Definiert wie zufällig die Antorten sein dürfen. Wert von 0.0 bis 1.0 (zufällig)."
+          },
+          "max_tokens": {
+            "name": "Maximum Tokens",
+            "description": "Maximale Anzahl Tokens welche pro Antwort verwendet werden dürfen. Höhere Werte ergeben längere und bessere Antworten."
+          }
+        }
+      }
+    }
+  }

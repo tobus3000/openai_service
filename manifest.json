@@ -1,0 +1,14 @@
+{
+    "domain": "openai_service",
+    "name": "OpenAI Service",
+    "codeowners": ["@tobus3000"],
+    "config_flow": true,
+    "dependencies": [],
+    "documentation": "https://github.com/tobus3000/openai_service",
+    "homekit": {},
+    "iot_class": "assumed_state",
+    "requirements": ["openai==1.12.0"],
+    "ssdp": [],
+    "zeroconf": []
+  }
+  
