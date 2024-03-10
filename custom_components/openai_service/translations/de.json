@@ -68,7 +68,7 @@
           },
           "temperature": {
             "name": "Temperatur",
-            "description": "Definiert wie zufällig die Antorten sein dürfen. Wert von 0.0 bis 1.0 (zufällig)."
+            "description": "Definiert wie zufällig die Antorten sein dürfen. Wert von 0.0 bis 2.0 (zufällig)."
           },
           "max_tokens": {
             "name": "Maximum Tokens",
