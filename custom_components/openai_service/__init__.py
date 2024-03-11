@@ -76,14 +76,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             frequency_penalty=0,
             presence_penalty=0,
         )
-        return {
-            "items": [
-                {
-                    "message": call.data.get("message"),
-                    "response": resp.choices[0].message.content,
-                }
-            ]
-        }
+        return {"response": resp.choices[0].message.content}
 
     # Register our service with Home Assistant.
     hass.services.async_register(
