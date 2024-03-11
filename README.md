@@ -20,3 +20,16 @@ These instructions assume that you already have a working installation of the [H
 
 Add this repository to HACS. https://github.com/tobus3000/openai_service
 
+### Step 2
+
+Search for "OpenAI Service" in the HACS - Home Assistant Community Store.  
+Click "Download".
+
+### Step 3
+
+Restart Home Assistant.
+
+### Step 4 (optional)
+
+Go to "Settings" -> "Devices & services" -> click the "OpenAI Service" integration.  
+Click the "Configure" button to fine-tune some aspects of your service.
