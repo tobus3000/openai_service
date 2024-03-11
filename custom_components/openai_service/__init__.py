@@ -77,9 +77,13 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             presence_penalty=0,
         )
         raw_response = resp.choices[0].message.content
-        cleanup_pattern = "###.*"
-        remove_excess_responses = re.sub(cleanup_pattern, '', raw_response)
-        sanitized_response = remove_excess_responses.replace('\n', ' ')
+        cleanup_patterns = [
+            "###.*",
+            "---.*"
+        ]
+        for pattern in cleanup_patterns:
+            raw_response = re.sub(pattern, '', raw_response)
+        sanitized_response = raw_response.replace('\n', ' ')
         return {"response": sanitized_response}
 
     # Register our service with Home Assistant.
