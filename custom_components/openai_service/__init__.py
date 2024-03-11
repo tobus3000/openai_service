@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import logging
-
+import re
 from openai import OpenAI
 import voluptuous as vol
 
@@ -19,7 +19,7 @@ import homeassistant.helpers.config_validation as cv
 
 from .const import DEFAULT_MAX_TOKENS, DEFAULT_MOOD, DEFAULT_TEMPERATURE, DOMAIN
 
-# PLATFORMS: list[Platform] = [Platform.TEXT]
+# PLATFORMS: list[Platform] = [Platform.SENSOR]
 PLATFORMS: list[Platform] = []
 _LOGGER = logging.getLogger(__name__)
 CHAT_ITEMS_SERVICE_NAME = "send_request"
@@ -76,7 +76,11 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             frequency_penalty=0,
             presence_penalty=0,
         )
-        return {"response": resp.choices[0].message.content}
+        raw_response = resp.choices[0].message.content
+        cleanup_pattern = "###.*"
+        remove_excess_responses = re.sub(cleanup_pattern, '', raw_response)
+        sanitized_response = remove_excess_responses.replace('\n', ' ')
+        return {"response": sanitized_response}
 
     # Register our service with Home Assistant.
     hass.services.async_register(
