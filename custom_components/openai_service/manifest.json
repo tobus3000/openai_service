@@ -1,10 +1,12 @@
 {
     "domain": "openai_service",
     "name": "OpenAI Service",
+    "integration_type": "service",
     "codeowners": ["@tobus3000"],
     "config_flow": true,
     "dependencies": [],
     "documentation": "https://github.com/tobus3000/openai_service",
+    "issue_tracker": "https://github.com/tobus3000/openai_service/issues",
     "homekit": {},
     "iot_class": "assumed_state",
     "requirements": ["openai==1.12.0"],
