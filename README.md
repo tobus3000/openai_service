@@ -71,7 +71,7 @@ Selecting the TTS engine based on the language of each sentence could therefor m
 
 Entwicklerwerkzeuge -> Dienste -> OpenAI Service: Sende eine OpenAI Abfrage
 
-#### Input
+#### Service
 
 ```yaml
 service: openai_service.send_request
@@ -82,7 +82,7 @@ data:
   max_tokens: 500
 ```
 
-#### Response
+#### Antwort
 
 ```yaml
 response: >
@@ -137,7 +137,7 @@ sentences:
 
 Developer tools -> Services -> OpenAI Service: Send OpenAI request
 
-#### Input
+#### Service
 
 ```yaml
 service: openai_service.send_request
