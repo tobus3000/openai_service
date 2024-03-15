@@ -95,6 +95,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
         service_response = {
             "response": response,
+            "language": lang_guess,
             "sentences": sentences_classified
         }
         _LOGGER.debug("OpenAI Service Response: %s", str(service_response))
