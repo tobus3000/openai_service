@@ -60,7 +60,7 @@
                 },
                 "message": {
                     "description": "The message to be sent to the OpenAI chat completion.",
-                    "example": "What is the distance from the earth to the moon?",
+                    "example": "How far is the moon from earth?",
                     "name": "Message"
                 },
                 "mood": {
