@@ -2,7 +2,8 @@
 from __future__ import annotations
 
 import logging
-from blingfire import *
+from blingfire import text_to_sentences
+import langid
 from openai import OpenAI
 import voluptuous as vol
 
@@ -77,10 +78,19 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             presence_penalty=0,
         )
         response = resp.choices[0].message.content
-        sentences = list(text_to_sentences(response))
+        sentences = text_to_sentences(response).splitlines(keepends=False)
+        sentences_classified = []
+        for s in sentences:
+            language = langid.classify(s)
+            sentences_classified.append = {
+                "text": s,
+                "language": language[0],
+                "confidence": language[1]
+            }
+
         service_response = {
             "response": response,
-            "sentences": sentences
+            "sentences": sentences_classified
         }
         _LOGGER.debug("OpenAI Service Response: %s", str(service_response))
         return service_response
