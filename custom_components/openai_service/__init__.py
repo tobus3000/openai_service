@@ -3,7 +3,8 @@ from __future__ import annotations
 
 import logging
 from blingfire import text_to_sentences
-import langid
+#import langid
+from langid.langid import LanguageIdentifier, model
 from openai import OpenAI
 import voluptuous as vol
 
@@ -80,8 +81,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         response = resp.choices[0].message.content
         sentences = text_to_sentences(response).splitlines(keepends=False)
         sentences_classified = []
+        identifier = LanguageIdentifier.from_modelstring(model, norm_probs=True)
         for s in sentences:
-            language = langid.classify(s)
+            language = identifier.classify(s)
             sentences_classified.append(
                 {
                     "text": s,
