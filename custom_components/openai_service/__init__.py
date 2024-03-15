@@ -82,11 +82,13 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         sentences_classified = []
         for s in sentences:
             language = langid.classify(s)
-            sentences_classified.append = {
-                "text": s,
-                "language": language[0],
-                "confidence": language[1]
-            }
+            sentences_classified.append(
+                {
+                    "text": s,
+                    "language": language[0],
+                    "confidence": language[1]
+                }
+            )
 
         service_response = {
             "response": response,
