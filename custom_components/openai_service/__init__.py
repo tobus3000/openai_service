@@ -55,7 +55,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         _LOGGER.debug("OpenAI Service Entry data %s", str(entry.data))
         messages = [
             {
-                "role": "assistant",
+                "role": "system",
                 "content": call.data.get(
                     "mood",
                     entry.options.get("mood", DEFAULT_MOOD),
