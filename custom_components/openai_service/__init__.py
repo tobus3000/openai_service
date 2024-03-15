@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import logging
-import re
+from blingfire import *
 from openai import OpenAI
 import voluptuous as vol
 
@@ -76,15 +76,14 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             frequency_penalty=0,
             presence_penalty=0,
         )
-        raw_response = resp.choices[0].message.content
-        cleanup_patterns = [
-            "###.*",
-            "---.*"
-        ]
-        for pattern in cleanup_patterns:
-            raw_response = re.sub(pattern, '', raw_response)
-        sanitized_response = raw_response.replace('\n', ' ')
-        return {"response": sanitized_response}
+        response = resp.choices[0].message.content
+        sentences = list(text_to_sentences(response))
+        service_response = {
+            "response": response,
+            "sentences": sentences
+        }
+        _LOGGER.debug("OpenAI Service Response: %s", str(service_response))
+        return service_response
 
     # Register our service with Home Assistant.
     hass.services.async_register(
