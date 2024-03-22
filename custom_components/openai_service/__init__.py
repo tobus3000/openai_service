@@ -67,6 +67,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         resp = client.chat.completions.create(
             model=entry.data.get("model"),
             messages=messages,
+            #response_format={ "type": "json_object" },
             temperature=call.data.get(
                 "temperature", entry.options.get("temperature", DEFAULT_TEMPERATURE)
             ),

@@ -1,8 +1,3 @@
-<img src="https://github.com/tobus3000/openai_service/blob/main/misc/ChatGPT_image.PNG?raw=true"
-     width="20%"
-     align="right"
-     style="float: right; margin: 10px 0px 20px 20px;" />
-
 # Home Assistant OpenAI Service
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg)](https://github.com/custom-components/hacs)
