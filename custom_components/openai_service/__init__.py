@@ -41,9 +41,11 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     _LOGGER.debug("OpenAI Service Config data %s", str(entry))
 
     if entry.data.get("endpoint_type") == "openai":
-        client = AsyncOpenAI(api_key=entry.data.get("api_key"))
+        client = OpenAI(api_key=entry.data.get("api_key"))
+        #client = AsyncOpenAI(api_key=entry.data.get("api_key"))
     elif entry.data.get("endpoint_type") == "custom":
-        client = AsyncOpenAI(base_url=entry.data.get("url"), api_key="nokey")
+        client = OpenAI(base_url=entry.data.get("url"), api_key="nokey")
+        #client = AsyncOpenAI(base_url=entry.data.get("url"), api_key="nokey")
     hass.data[DOMAIN][entry.entry_id] = client
     # Register Options update listener
     entry.async_on_unload(entry.add_update_listener(update_listener))
