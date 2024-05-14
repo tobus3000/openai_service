@@ -22,10 +22,6 @@ class OpenAIService(ChatService):
         """
         super().__init__(entry)  # Call the __init__ method of the base class
         _LOGGER.debug("OpenAIService Entry data %s", str(entry.data))
-        if entry.data.get("endpoint_type") == "openai":
-            self.client = AsyncOpenAI(api_key=entry.data.get("api_key"))
-        elif entry.data.get("endpoint_type") == "custom":
-            self.client = AsyncOpenAI(base_url=entry.data.get("url"), api_key="nokey")
 
     async def chat_completion(self, call: ServiceCall) -> ServiceResponse:
         """Responsible for driving the chat completion with the given input parameters.
@@ -37,6 +33,10 @@ class OpenAIService(ChatService):
             ServiceResponse: A dictionary holding the response and other information.
         """
         _LOGGER.debug("OpenAIService Service data %s", str(call.data))
+        if self.endpoint_type == "openai":
+            client = AsyncOpenAI(api_key=self._api_key)
+        elif self.endpoint_type == "custom":
+            client = AsyncOpenAI(base_url=self._base_url, api_key=self._api_key)
         messages = [
             {
                 "role": "system",
@@ -48,7 +48,7 @@ class OpenAIService(ChatService):
             {"role": "user", "content": call.data.get("message")},
         ]
         _LOGGER.debug("OpenAI Service Message: %s", str(messages))
-        async with self.client as client_instance:
+        async with client as client_instance:
             response = await client_instance.chat.completions.create(
                 model=self._model,
                 messages=messages,
@@ -58,7 +58,7 @@ class OpenAIService(ChatService):
                 frequency_penalty=0,
                 presence_penalty=0.6
             )
-        self._response = response.choices[0].message.content
+        self.response = response.choices[0].message.content
         service_response = self.prepare_response()
         _LOGGER.debug("OpenAI Service Response: %s", str(service_response))
         return service_response
