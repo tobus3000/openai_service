@@ -49,11 +49,11 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     openai_service = OpenAIService(entry)
 
     @callback
-    def chat_completion(call: ServiceCall) -> ServiceResponse:
+    async def chat_completion(call: ServiceCall) -> ServiceResponse:
         """Run chat completion."""
         _LOGGER.debug("OpenAI Service Received data %s", str(call.data))
         _LOGGER.debug("OpenAI Service Entry data %s", str(entry.data))
-        return openai_service.chat_completion(call)
+        return await openai_service.chat_completion(call)
 
     # Register our service with Home Assistant.
     hass.services.async_register(
