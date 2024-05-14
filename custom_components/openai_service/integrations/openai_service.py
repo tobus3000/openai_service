@@ -51,7 +51,7 @@ class OpenAIService(ChatService):
         ]
         _LOGGER.debug("OpenAI Service Message: %s", str(messages))
         async with self.client as client_instance:
-            response = await client_instance.completions.create(
+            response = await client_instance.chat.completions.create(
                 model=self._model,
                 messages=messages,
                 temperature=self._temperature,
