@@ -34,15 +34,15 @@ class OpenAIService(ChatService):
         """
         _LOGGER.debug("OpenAIService Service data %s", str(call.data))
         if self.endpoint_type == "openai":
-            client = AsyncOpenAI(api_key=self._api_key)
+            client = AsyncOpenAI(api_key=self.api_key)
         elif self.endpoint_type == "custom":
-            client = AsyncOpenAI(base_url=self._base_url, api_key=self._api_key)
+            client = AsyncOpenAI(base_url=self.base_url, api_key=self.api_key)
         messages = [
             {
                 "role": "system",
                 "content": call.data.get(
                     "mood",
-                    self._mood
+                    self.mood
                 ),
             },
             {"role": "user", "content": call.data.get("message")},
@@ -50,10 +50,10 @@ class OpenAIService(ChatService):
         _LOGGER.debug("OpenAI Service Message: %s", str(messages))
         async with client as client_instance:
             response = await client_instance.chat.completions.create(
-                model=self._model,
+                model=self.model,
                 messages=messages,
-                temperature=self._temperature,
-                max_tokens=self._max_tokens,
+                temperature=self.temperature,
+                max_tokens=self.max_tokens,
                 top_p=1,
                 frequency_penalty=0,
                 presence_penalty=0.6

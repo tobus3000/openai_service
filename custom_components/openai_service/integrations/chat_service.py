@@ -28,7 +28,7 @@ class ChatService(ABC):
         self.base_url = entry.data.get("url")
         self.max_tokens = entry.options.get("max_tokens", DEFAULT_MAX_TOKENS)
         self.mood = entry.options.get("mood", DEFAULT_MOOD)
-        self._temperature = entry.options.get("temperature", DEFAULT_TEMPERATURE)
+        self.temperature = entry.options.get("temperature", DEFAULT_TEMPERATURE)
 
     @property
     def entry(self):
