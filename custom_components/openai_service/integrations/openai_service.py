@@ -22,6 +22,7 @@ class OpenAIService(ChatService):
         """
         super().__init__(entry)  # Call the __init__ method of the base class
         self.frequency_penalty = 0
+        self.presence_penalty = 0.6
         _LOGGER.debug("OpenAIService Entry data %s", str(entry.data))
 
     @property
