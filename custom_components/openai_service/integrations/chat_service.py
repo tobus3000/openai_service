@@ -1,6 +1,7 @@
 """
 The abstract base class from which the integrations inherit their structure and base functions.
 """
+import asyncio
 from abc import ABC, abstractmethod
 from pysbd import Segmenter
 from langid.langid import LanguageIdentifier, model
@@ -28,7 +29,7 @@ class ChatService(ABC):
         self._temperature = entry.options.get("temperature", DEFAULT_TEMPERATURE)
 
     @abstractmethod
-    def chat_completion(self, call: ServiceCall) -> ServiceResponse:
+    async def chat_completion(self, call: ServiceCall) -> ServiceResponse:
         """Responsible for driving the chat completion with the given input parameters.
 
         Args:

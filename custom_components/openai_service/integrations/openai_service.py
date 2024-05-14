@@ -1,7 +1,6 @@
 """
 The chat completion integration for the openai API.
 """
-import asyncio
 from openai import OpenAI, AsyncOpenAI
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import ServiceCall, ServiceResponse
