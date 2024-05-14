@@ -41,7 +41,7 @@
       "step": {
         "init": {
           "title": "Konfiguriere den Endpunkt",
-          "description": "Feineinstellungen für den OpenAI Endpunkt.",
+          "description": "Einstellungen für den OpenAI Endpunkt.",
           "data": {
             "mood": "Ein Satz der definiert wie der Assistent antworten soll.",
             "temperature": "Definiert wie zufällig Antworten sein dürfen.",
