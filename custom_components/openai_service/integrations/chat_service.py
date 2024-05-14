@@ -22,13 +22,14 @@ class ChatService(ABC):
         """
         self._entry = entry
         self._response = None
+        self._model = entry.options.get("model", "no-model")
         self._max_tokens = entry.options.get("max_tokens", DEFAULT_MAX_TOKENS)
         self._mood = entry.options.get("mood", DEFAULT_MOOD)
         self._temperature = entry.options.get("temperature", DEFAULT_TEMPERATURE)
 
     @abstractmethod
     def chat_completion(self, call: ServiceCall) -> ServiceResponse:
-        """Responsible to drive the chat completion with the given input parameters.
+        """Responsible for driving the chat completion with the given input parameters.
 
         Args:
             call (ServiceCall): The Home Assistant service call object
