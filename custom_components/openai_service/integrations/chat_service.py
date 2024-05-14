@@ -1,7 +1,6 @@
 """
 The abstract base class from which the integrations inherit their structure and base functions.
 """
-import asyncio
 from abc import ABC, abstractmethod
 from pysbd import Segmenter
 from langid.langid import LanguageIdentifier, model
