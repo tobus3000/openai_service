@@ -83,7 +83,7 @@ class OpenAIService(ChatService):
             client = AsyncOpenAI(base_url=self.base_url, api_key=self.api_key)
         async with client as client_instance:
             response = await client_instance.chat.completions.create(
-                self.build_completion_payload(call)
+                **self.build_completion_payload(call)
             )
         self.response = response.choices[0].message.content
         service_response = self.prepare_response()
