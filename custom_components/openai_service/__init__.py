@@ -2,8 +2,6 @@
 from __future__ import annotations
 
 import logging
-from pysbd import Segmenter
-from langid.langid import LanguageIdentifier, model
 from openai import OpenAI, AsyncOpenAI
 import voluptuous as vol
 
@@ -17,9 +15,7 @@ from homeassistant.core import (
     callback,
 )
 import homeassistant.helpers.config_validation as cv
-#TODO: load class from integrations
 from .integrations.openai_service import OpenAIService
-
 from .const import DEFAULT_MAX_TOKENS, DEFAULT_MOOD, DEFAULT_TEMPERATURE, DOMAIN
 
 # PLATFORMS: list[Platform] = [Platform.SENSOR]
@@ -34,7 +30,6 @@ CHAT_ITEMS_SCHEMA = vol.Schema(
         vol.Optional("max_tokens"): cv.positive_int,
     }
 )
-
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up OpenAI Service from a config entry."""
@@ -51,8 +46,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     hass.data[DOMAIN][entry.entry_id] = client
     # Register Options update listener
     entry.async_on_unload(entry.add_update_listener(update_listener))
-
-    #TODO: externalize service calls
     openai_service = OpenAIService(entry)
 
     @callback
@@ -60,57 +53,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         """Run chat completion."""
         _LOGGER.debug("OpenAI Service Received data %s", str(call.data))
         _LOGGER.debug("OpenAI Service Entry data %s", str(entry.data))
-        #TODO: replace all code in this function with call to class.
         return openai_service.chat_completion(call)
-        # messages = [
-        #     {
-        #         "role": "system",
-        #         "content": call.data.get(
-        #             "mood",
-        #             entry.options.get("mood", DEFAULT_MOOD),
-        #         ),
-        #     },
-        #     {"role": "user", "content": call.data.get("message")},
-        # ]
-        # _LOGGER.debug("OpenAI Service Message: %s", str(messages))
-        # resp = client.chat.completions.create(
-        #     model=entry.data.get("model"),
-        #     messages=messages,
-        #     #response_format={ "type": "json_object" },
-        #     temperature=call.data.get(
-        #         "temperature", entry.options.get("temperature", DEFAULT_TEMPERATURE)
-        #     ),
-        #     max_tokens=call.data.get(
-        #         "max_tokens", entry.options.get("max_tokens", DEFAULT_MAX_TOKENS)
-        #     ),
-        #     top_p=1,
-        #     frequency_penalty=0,
-        #     presence_penalty=0,
-        # )
-        # response = resp.choices[0].message.content
-        # identifier = LanguageIdentifier.from_modelstring(model, norm_probs=True)
-        # lang_guess = identifier.classify(response)
-        # seg = Segmenter(language=lang_guess[0], clean=False)
-        # sentences = seg.segment(response)
-        # sentences_classified = []
-        # for s in sentences:
-        #     language = identifier.classify(s)
-        #     sentences_classified.append(
-        #         {
-        #             "text": s,
-        #             "language": language[0],
-        #             "confidence": language[1]
-        #         }
-        #     )
-
-        # service_response = {
-        #     "response": response,
-        #     "language": lang_guess[0],
-        #     "confidence": lang_guess[1],
-        #     "sentences": sentences_classified
-        # }
-        # _LOGGER.debug("OpenAI Service Response: %s", str(service_response))
-        # return service_response
 
     # Register our service with Home Assistant.
     hass.services.async_register(
